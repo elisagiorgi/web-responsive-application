@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-//Components
 import InfiniteScroll from "react-infinite-scroll-component";
+import styled from "styled-components";
+
+//Components
 import Loading from "./components/Loading";
+import Card from "./components/Card";
 
 export default function App() {
   const URL = "https://jsonplaceholder.typicode.com/posts";
@@ -11,6 +14,11 @@ export default function App() {
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState();
   const [hasMore, setHasMore] = useState(true);
+
+  const Container = styled.div`
+    background: #e8d6cf;
+    padding: 10px;
+  `;
 
   useEffect(() => {
     //counting totals element
@@ -54,13 +62,11 @@ export default function App() {
       hasMore={hasMore}
       loader={postsList?.length === total ? null : <Loading />}
     >
-      <div>
-        {postsList?.map((el, index) => (
-          <div style={{ height: "150px" }}>
-            {el.id} {el.title}
-          </div>
+      <Container>
+        {postsList?.map((post, index) => (
+          <Card key={index} post={post} />
         ))}
-      </div>
+      </Container>
     </InfiniteScroll>
   );
 }
