@@ -16,16 +16,25 @@ export default function App() {
   const [hasMore, setHasMore] = useState(true);
 
   const Container = styled.div`
-    background: #e8d6cf;
     padding: 10px;
     text-align: center;
+    background: #e8d6cf;
   `;
 
-  const Title = styled.span`
+  const Wrapper = styled.div`
+    background: #e8d6cf;
+    height: 100%;
+  `;
+
+  const Title = styled.div`
     text-align: center;
-    font-size: 50px;
+    font-size: 60px;
     font-weight: bold;
     font-family: "Advent Pro", sans-serif;
+    position: sticky;
+    top: 0;
+    background: #e8d6cf;
+    width: 100%;
   `;
 
   useEffect(() => {
@@ -64,18 +73,20 @@ export default function App() {
   }, [getPosts]);
 
   return (
-    <InfiniteScroll
-      dataLength={postsList?.length}
-      next={() => moreData()}
-      hasMore={hasMore}
-      loader={postsList?.length === total ? null : <Loading />}
-    >
-      <Container>
-        <Title>{"POSTS"}</Title>
-        {postsList?.map((post, index) => (
-          <Card key={index} post={post} />
-        ))}
-      </Container>
-    </InfiniteScroll>
+    <Wrapper>
+      <Title>{"POSTS"}</Title>
+      <InfiniteScroll
+        dataLength={postsList?.length}
+        next={() => moreData()}
+        hasMore={hasMore}
+        loader={postsList?.length === total ? null : <Loading />}
+      >
+        <Container>
+          {postsList?.map((post, index) => (
+            <Card key={index} post={post} />
+          ))}
+        </Container>
+      </InfiniteScroll>
+    </Wrapper>
   );
 }
