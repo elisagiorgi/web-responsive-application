@@ -19,10 +19,10 @@ const Container = styled.div`
   border-radius: 25px;
   min-height: 100px;
   color: #fff;
+  cursor: pointer;
 `;
 
 const Card = ({ post }) => {
-  console.log(post);
   return (
     <Container>
       <Counter number={post.id} />

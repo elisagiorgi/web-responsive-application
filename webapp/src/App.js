@@ -18,6 +18,14 @@ export default function App() {
   const Container = styled.div`
     background: #e8d6cf;
     padding: 10px;
+    text-align: center;
+  `;
+
+  const Title = styled.span`
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: "Advent Pro", sans-serif;
   `;
 
   useEffect(() => {
@@ -63,6 +71,7 @@ export default function App() {
       loader={postsList?.length === total ? null : <Loading />}
     >
       <Container>
+        <Title>{"POSTS"}</Title>
         {postsList?.map((post, index) => (
           <Card key={index} post={post} />
         ))}
