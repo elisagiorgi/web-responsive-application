@@ -16,24 +16,18 @@ export default function App() {
   const [hasMore, setHasMore] = useState(true);
 
   const Container = styled.div`
-    padding: 10px;
-    text-align: center;
     background: #e8d6cf;
+    padding: 40px 10px;
+    text-align: center;
   `;
 
-  const Wrapper = styled.div`
-    background: #e8d6cf;
-    height: 100%;
-  `;
-
-  const Title = styled.div`
+  const Title = styled.span`
     text-align: center;
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     font-family: "Advent Pro", sans-serif;
-    position: sticky;
-    top: 0;
     background: #e8d6cf;
+    position: fixed;
     width: 100%;
   `;
 
@@ -73,7 +67,7 @@ export default function App() {
   }, [getPosts]);
 
   return (
-    <Wrapper>
+    <>
       <Title>{"POSTS"}</Title>
       <InfiniteScroll
         dataLength={postsList?.length}
@@ -82,11 +76,12 @@ export default function App() {
         loader={postsList?.length === total ? null : <Loading />}
       >
         <Container>
+          {/* <Title>{"POSTS"}</Title> */}
           {postsList?.map((post, index) => (
             <Card key={index} post={post} />
           ))}
         </Container>
       </InfiniteScroll>
-    </Wrapper>
+    </>
   );
 }
