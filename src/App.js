@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
@@ -53,7 +53,6 @@ const SubText = styled.span`
 const ModalText = styled.span`
     font-family: "Advent Pro", sans-serif;
     font-size: 15px;
-
 }
   `;
 
@@ -90,17 +89,35 @@ export default function App() {
   };
 
   useEffect(() => {
-    let url = `${URL}?_start=${page}&_limit=10`;
-    fetch(url)
-      .then((response) => {
-        if (response.ok) return response.json();
-        throw new Error("something went wrong while requesting postsList");
-      })
-      .then((posts) => setPostsList([...postsList, ...posts]))
-      .catch((e) => console.log(e));
-
+    // Async await syntax
+    const getPosts = async () => {
+      try {
+        let url = `${URL}?_start=${page}&_limit=10`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("err");
+        const posts = await response.json();
+        setPostsList([...postsList, ...posts]);
+      } catch (e) {
+        console.log("erro");
+      }
+    };
+    getPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  // Promise chaining syntax
+  // useEffect(() => {
+  //   let url = `${URL}?_start=${page}&_limit=10`;
+  //   fetch(url)
+  //     .then((response) => {
+  //       if (response.ok) return response.json();
+  //       throw new Error("something went wrong while requesting postsList");
+  //     })
+  //     .then((posts) => setPostsList([...postsList, ...posts]))
+  //     .catch((e) => console.log(e));
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [page]);
 
   return (
     <>
