@@ -65,7 +65,7 @@ export default function App() {
   const ModalText = styled.span`
     font-family: "Advent Pro", sans-serif;
     font-size: 15px;
-    padding: 30px;
+
 }
   `;
 
