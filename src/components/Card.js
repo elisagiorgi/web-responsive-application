@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ThemeContext } from "../context/ThemeContext";
 
 import Counter from "./Counter";
 
@@ -12,7 +13,7 @@ const Container = styled.div`
   max-width: 300px;
   margin: 20px auto;
   padding: 15px 10px;
-  background: #8c7386;
+  background: ${(props) => props.backgroundColor};
   font-family: "Advent Pro", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
@@ -22,9 +23,12 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const Card = ({ post, onClickEvent, setContent }) => {
+const Card = ({ index, post, onClickEvent, setContent }) => {
+  const { palette } = useContext(ThemeContext);
+
   return (
     <Container
+      backgroundColor={index % 2 === 0 ? palette[0] : palette[1]}
       onClick={() => {
         onClickEvent();
         setContent(post.body);

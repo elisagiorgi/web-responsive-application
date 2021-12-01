@@ -12,6 +12,51 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import "./modal-styling.css";
 
+const Container = styled.div`
+  background: #e8d6cf;
+  padding: 50px 10px;
+  text-align: center;
+`;
+
+const Title = styled.span`
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Advent Pro", sans-serif;
+  background: #e8d6cf;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+`;
+
+const Sub = styled.span`
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "Advent Pro", sans-serif;
+    padding-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+  `;
+
+const SubText = styled.span`
+    margin: 0 10px;
+}
+  `;
+
+const ModalText = styled.span`
+    font-family: "Advent Pro", sans-serif;
+    font-size: 15px;
+
+}
+  `;
+
 export default function App() {
   const URL = "https://jsonplaceholder.typicode.com/posts";
   const [postsList, setPostsList] = useState([]);
@@ -24,51 +69,6 @@ export default function App() {
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-
-  const Container = styled.div`
-    background: #e8d6cf;
-    padding: 50px 10px;
-    text-align: center;
-  `;
-
-  const Title = styled.span`
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    font-family: "Advent Pro", sans-serif;
-    background: #e8d6cf;
-    width: 100%;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    z-index: 50;
-  `;
-
-  const Sub = styled.span`
-    text-align: center;
-    font-size: 15px;
-    font-weight: bold;
-    font-family: "Advent Pro", sans-serif;
-    padding-bottom: 5px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-  `;
-
-  const SubText = styled.span`
-    margin: 0 10px;
-}
-  `;
-
-  const ModalText = styled.span`
-    font-family: "Advent Pro", sans-serif;
-    font-size: 15px;
-
-}
-  `;
 
   useEffect(() => {
     //counting totals element
@@ -89,21 +89,18 @@ export default function App() {
     setPage(page + 10);
   };
 
-  const getPosts = useCallback(async () => {
+  useEffect(() => {
     let url = `${URL}?_start=${page}&_limit=10`;
-    await fetch(url)
+    fetch(url)
       .then((response) => {
         if (response.ok) return response.json();
         throw new Error("something went wrong while requesting postsList");
       })
       .then((posts) => setPostsList([...postsList, ...posts]))
       .catch((e) => console.log(e));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
-
-  useEffect(() => {
-    getPosts();
-  }, [getPosts]);
 
   return (
     <>
@@ -125,6 +122,7 @@ export default function App() {
           {postsList?.map((post, index) => (
             <Card
               key={index}
+              index={index}
               post={post}
               onClickEvent={onOpenModal}
               setContent={setContent}
