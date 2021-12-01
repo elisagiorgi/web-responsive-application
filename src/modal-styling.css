@@ -1,0 +1,48 @@
+.customModal {
+    background: #84798B;
+    color: #fff;
+    max-width: 140px;
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+}
+
+@keyframes customEnterOverlayAnimation {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes customLeaveOverlayAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes customEnterModalAnimation {
+    0% {
+        transform: scale(0.6);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes customLeaveModalAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.2);
+    }
+}

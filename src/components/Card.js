@@ -17,14 +17,19 @@ const Container = styled.div`
   font-weight: 600;
   text-transform: uppercase;
   border-radius: 25px;
-  min-height: 100px;
+  min-height: 90px;
   color: #fff;
   cursor: pointer;
 `;
 
-const Card = ({ post }) => {
+const Card = ({ post, onClickEvent, setContent }) => {
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        onClickEvent();
+        setContent(post.body);
+      }}
+    >
       <Counter number={post.id} />
       {post.title}
     </Container>

@@ -2,10 +2,15 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
+import { GrLinkDown } from "react-icons/gr";
 
 //Components
 import Loading from "./components/Loading";
 import Card from "./components/Card";
+
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+import "./modal-styling.css";
 
 export default function App() {
   const URL = "https://jsonplaceholder.typicode.com/posts";
@@ -14,10 +19,15 @@ export default function App() {
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState();
   const [hasMore, setHasMore] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [content, setContent] = useState("");
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   const Container = styled.div`
     background: #e8d6cf;
-    padding: 40px 10px;
+    padding: 50px 10px;
     text-align: center;
   `;
 
@@ -27,8 +37,36 @@ export default function App() {
     font-weight: bold;
     font-family: "Advent Pro", sans-serif;
     background: #e8d6cf;
-    position: fixed;
     width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+  `;
+
+  const Sub = styled.span`
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "Advent Pro", sans-serif;
+    padding-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+  `;
+
+  const SubText = styled.span`
+    margin: 0 10px;
+}
+  `;
+
+  const ModalText = styled.span`
+    font-family: "Advent Pro", sans-serif;
+    font-size: 15px;
+    padding: 30px;
+}
   `;
 
   useEffect(() => {
@@ -68,7 +106,15 @@ export default function App() {
 
   return (
     <>
-      <Title>{"POSTS"}</Title>
+      <Title>
+        {"POSTS"}
+        <Sub>
+          <GrLinkDown />
+          <SubText>{"Click on each post to see its content"} </SubText>
+          <GrLinkDown />
+        </Sub>
+      </Title>
+
       <InfiniteScroll
         dataLength={postsList?.length}
         next={() => moreData()}
@@ -78,9 +124,29 @@ export default function App() {
         <Container>
           {/* <Title>{"POSTS"}</Title> */}
           {postsList?.map((post, index) => (
-            <Card key={index} post={post} />
+            <Card
+              key={index}
+              post={post}
+              onClickEvent={onOpenModal}
+              setContent={setContent}
+            />
           ))}
         </Container>
+        <Modal
+          open={open}
+          onClose={onCloseModal}
+          center
+          classNames={{
+            overlay: "customOverlay",
+            modal: "customModal",
+            overlayAnimationIn: "customEnterOverlayAnimation",
+            overlayAnimationOut: "customLeaveOverlayAnimation",
+            modalAnimationIn: "customEnterModalAnimation",
+            modalAnimationOut: "customLeaveModalAnimation",
+          }}
+        >
+          <ModalText>{content}</ModalText>
+        </Modal>
       </InfiniteScroll>
     </>
   );
