@@ -94,11 +94,12 @@ export default function App() {
       try {
         let url = `${URL}?_start=${page}&_limit=10`;
         const response = await fetch(url);
-        if (!response.ok) throw new Error("err");
+        if (!response.ok)
+          throw new Error("something went wrong while requesting postsList");
         const posts = await response.json();
         setPostsList([...postsList, ...posts]);
       } catch (e) {
-        console.log("erro");
+        console.log(e);
       }
     };
     getPosts();
