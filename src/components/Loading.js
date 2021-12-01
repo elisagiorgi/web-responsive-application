@@ -1,8 +1,16 @@
 import React from "react";
-import ReactLoading from "react-loading";
+import { ReactComponent as Bars } from "../assets/bars.svg";
+import styled from "styled-components";
 
-const Loading = ({ type, color }) => (
-  <ReactLoading type={type} color={color} height={"20%"} width={"20%"} />
+const Container = styled.div`
+  display: block;
+  margin: auto;
+`;
+
+const Loading = () => (
+  <Container>
+    <Bars />
+  </Container>
 );
 
 export default Loading;

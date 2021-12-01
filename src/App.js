@@ -115,7 +115,6 @@ export default function App() {
           <GrLinkDown />
         </Sub>
       </Title>
-
       <InfiniteScroll
         dataLength={postsList?.length}
         next={() => moreData()}
@@ -123,7 +122,6 @@ export default function App() {
         loader={postsList?.length === total ? null : <Loading />}
       >
         <Container>
-          {/* <Title>{"POSTS"}</Title> */}
           {postsList?.map((post, index) => (
             <Card
               key={index}
