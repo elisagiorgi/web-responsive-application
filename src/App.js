@@ -43,6 +43,7 @@ export default function App() {
     top: 0;
     display: flex;
     flex-direction: column;
+    z-index: 50;
   `;
 
   const Sub = styled.span`
