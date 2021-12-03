@@ -4,6 +4,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
 import { GrLinkDown } from "react-icons/gr";
 
+import { deviceQuery } from "./mediaQuery";
+
 //Components
 import Loading from "./components/Loading";
 import Card from "./components/Card";
@@ -31,6 +33,18 @@ const Title = styled.span`
   display: flex;
   flex-direction: column;
   z-index: 50;
+
+  @media ${deviceQuery.tablet} {
+    font-size: 60px;
+  }
+
+  @media ${deviceQuery.laptop} {
+    font-size: 90px;
+  }
+
+  @media ${deviceQuery.desktop} {
+    font-size: 100px;
+  }
 `;
 
 const Sub = styled.span`
@@ -42,6 +56,16 @@ const Sub = styled.span`
     align-items: center;
     justify-content: center;
     display: flex;
+  @media ${deviceQuery.tablet} {
+    font-size: 20px;
+  }
+  @media ${deviceQuery.laptop} {
+    font-size: 30px;
+  }
+
+  @media ${deviceQuery.desktop} {
+    font-size: 40px;
+  }
 }
   `;
 
@@ -53,6 +77,17 @@ const SubText = styled.span`
 const ModalText = styled.span`
     font-family: "Advent Pro", sans-serif;
     font-size: 15px;
+    @media ${deviceQuery.tablet} {
+    font-size: 20px;
+  }
+
+  @media ${deviceQuery.laptop} {
+    font-size: 40px;
+  }
+
+  @media ${deviceQuery.desktop} {
+    font-size: 50px;
+  }
 }
   `;
 

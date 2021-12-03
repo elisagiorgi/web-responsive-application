@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../context/ThemeContext";
 
 import Counter from "./Counter";
+import { deviceQuery } from "../mediaQuery";
 
 const Container = styled.div`
   display: flex;
@@ -21,6 +22,23 @@ const Container = styled.div`
   min-height: 90px;
   color: #fff;
   cursor: pointer;
+  font-size: 15px;
+
+  @media ${deviceQuery.tablet} {
+    max-width: 700px;
+  }
+
+  @media ${deviceQuery.laptop} {
+    max-width: 900px;
+    min-height: 120px;
+    font-size: 20px;
+  }
+
+  @media ${deviceQuery.desktop} {
+    max-width: 1300px;
+    min-height: 130px;
+    font-size: 30px;
+  }
 `;
 
 const Card = ({ index, post, onClickEvent, setContent }) => {
