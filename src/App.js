@@ -18,6 +18,18 @@ const Container = styled.div`
   background: #e8d6cf;
   padding: 50px 10px;
   text-align: center;
+
+  @media ${deviceQuery.tablet} {
+    padding-top: 100px;
+  }
+
+  @media ${deviceQuery.laptop} {
+    padding-top: 150px;
+  }
+
+  @media ${deviceQuery.desktop} {
+    padding-top: 160px;
+  }
 `;
 
 const Title = styled.span`
